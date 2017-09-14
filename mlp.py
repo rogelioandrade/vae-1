@@ -106,7 +106,8 @@ class GaussianMLP(_MLP):
             assert(eps is None)
             # XXX specific to [0, 1] outputs
             self.out = T.nnet.sigmoid(self.mu)
-            self.cost = -T.sum(log_diag_mvn(self.out, self.var)(y))
+            # I dont understand why why the minus sign infront of log-likelihood
+            self.cost = T.sum(log_diag_mvn(self.out, self.var)(y))
 
 class BernoulliMLP(_MLP):
 
